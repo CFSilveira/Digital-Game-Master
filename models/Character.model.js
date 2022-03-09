@@ -19,7 +19,7 @@ const characterSchema = new Schema(
     stats: {
         type: [String],
       },
-    status: String,
+    charStatus: String,
     inventory: {
         type: [String],
       },
