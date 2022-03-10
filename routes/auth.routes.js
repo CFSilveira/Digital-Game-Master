@@ -22,8 +22,8 @@ router.get('/verify', isAuthenticated, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
-router.post('/signup', isLoggedOut, (req, res) => {
-  const { username, password } = req.body;
+router.post('/signup', (req, res) => {
+  const { username, password, email } = req.body;
 
   if (!username) {
     return res.status(400).json({ errorMessage: 'Please provide your username.' });
@@ -63,6 +63,7 @@ router.post('/signup', isLoggedOut, (req, res) => {
         return User.create({
           username,
           password: hashedPassword,
+          email,
         });
       })
       .then((user) => {

@@ -1,28 +1,21 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
 
-//axios
-const axios = require("axios");
+const Character = require('../models/Character.model');
 
-router.get('/inventory', async (req, res, next) => {
-  try {
-      
-    //create a string var that will include the id of all games to search
-    let urlToSearch = `https://www.dnd5eapi.co/api/equipment/`;
-    //searches API using the var
-    const axiosResponse = await axios.get(urlToSearch)
-    //filters the data received
-    const axiosItems = axiosResponse.data.results.name;
-  }
+router.post('/chars', (req, res, next) => {
+  const { name, avatar, charClass, stats, charStatus, inventory, position, enemy } = req.body;
+
+  Character.create({ name, avatar, charClass, stats, charStatus, inventory, position, enemy })
+    .then((response) => res.json(response))
+    .catch((err) => next(err));
+});
+
+router.get('/chars', (req, res, next) => {
+  Character.find()
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
-
-router.get('/inventory', async (req, res, next) => {
-    Character.find()
-      .then((response) => res.json(response))
-      .catch((err) => res.json(err));
-  });
 
 router.get('/chars/:charId', (req, res, next) => {
   const { charId } = req.params;

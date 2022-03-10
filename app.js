@@ -24,11 +24,11 @@ app.use("/api", allRoutes);
 const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes);
 
-const projectRoutes = require('./routes/project.routes');
-app.use('/api', isAuthenticated, projectRoutes);
+const charRoutes = require('./routes/chars.routes');
+app.use('/api', charRoutes);
 
-const taskRoutes = require('./routes/task.routes');
-app.use('/api', isAuthenticated, taskRoutes);
+/* const taskRoutes = require('./routes/task.routes');
+app.use('/api', isAuthenticated, taskRoutes); */
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

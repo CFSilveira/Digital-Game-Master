@@ -4,7 +4,6 @@ const characterSchema = new Schema(
   {
     name: {
       type: String,
-      unique: true,
       trim: true,
       required: true,
     },
@@ -12,17 +11,14 @@ const characterSchema = new Schema(
         type: String,
         trim: true,
       },
-    class: {
-        type: String,
-        trim: true,
-      },
-    stats: {
-        type: [String],
-      },
+    charClass: String,
+    stats: [{
+        type: Number,
+      }],
     charStatus: String,
-    inventory: {
-        type: [String],
-      },
+    inventory: [{
+      type: String,
+    }],
     position: Number,      
     enemy: Boolean,
   },
