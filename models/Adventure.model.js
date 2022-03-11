@@ -16,16 +16,11 @@ const adventureSchema = new Schema(
         type: String,
         trim: true,
       },
-    steps: Number,      
-    zonesA: {
-        type: [String],
-    },
-    zonesB: {
-        type: [String],
-    },
-    zonesC: {
-        type: [String],
-    },
+    steps: Number,
+    Areas: [{
+      type: Schema.Types.ObjectId,
+      ref: "Area",
+    }],
     encounters: {
         type: [String],
       },

@@ -20,7 +20,7 @@ router.get('/area', (req, res, next) => {
 router.get('/area/:areaId', (req, res, next) => {
   const { areaId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(charId)) {
+  if (!mongoose.Types.ObjectId.isValid(areaId)) {
     res.status(400).json({ message: 'Specified Id is not valid' });
     return;
   }
@@ -51,7 +51,7 @@ router.delete('/area/:areaId', (req, res, next) => {
       return;
     }
     Area.findByIdAndRemove(areaId)
-      .then(() => res.json({Areae: `Project with ${areaId} was removed successfully` }))
+      .then(() => res.json({message: `Area with ${areaId} was removed successfully` }))
       .catch((err) => res.json(err));
   });
 

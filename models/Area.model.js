@@ -21,11 +21,16 @@ const areaSchema = new Schema(
         required: true,
     },
     connections: [{
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Area",
     }],
     events: [{
         type: String,
       }],
+    Adventure: {
+      type: Schema.Types.ObjectId,
+      ref: "Adventure",
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

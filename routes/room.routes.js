@@ -43,4 +43,16 @@ router.put('/room/:roomId', (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+router.delete('/room/:roomId', (req, res, next) => {
+  const { roomId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(roomId)) {
+    res.status(400).json({ message: 'Specified Id is not valid' });
+    return;
+  }
+  Room.findByIdAndRemove(roomId)
+    .then(() => res.json({message: `Room with ${roomId} was removed successfully` }))
+    .catch((err) => res.json(err));
+});
+
 module.exports = router;

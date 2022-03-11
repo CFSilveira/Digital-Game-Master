@@ -43,15 +43,15 @@ router.put('/chars/:charId', (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-router.delete('/chars/:charId', (req, resCharacterxt) => {
+router.delete('/chars/:charId', (req, res, next) => {
   const { charId } = req.params;
 
-  if (!mongoose.Characters.ObjectId.isValid(charId)) {
+  if (!mongoose.Types.ObjectId.isValid(charId)) {
     res.status(400).json({ message: 'Specified Id is not valid' });
     return;
   }
   Character.findByIdAndRemove(charId)
-    .then(() => res.json({Character: `Project with ${charId} was removed successfully` }))
+    .then(() => res.json({ message: `Character with ${charId} was removed successfully` }))
     .catch((err) => res.json(err));
 });
 
