@@ -51,7 +51,7 @@ router.delete('/chars/:charId', (req, resCharacterxt) => {
     return;
   }
   Character.findByIdAndRemove(charId)
-    .then(() => res.json({Charactere: `Project with ${charId} was removed successfully` }))
+    .then(() => res.json({Character: `Project with ${charId} was removed successfully` }))
     .catch((err) => res.json(err));
 });
 

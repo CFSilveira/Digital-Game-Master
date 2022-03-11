@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const sessionSchema = new Schema(
+const roomSchema = new Schema(
   {
     name: {
       type: String,
@@ -8,7 +8,7 @@ const sessionSchema = new Schema(
       trim: true,
       required: true,
     },
-    sessionId: {
+    roomId: {
         type: Number,
         unique: true,
       },
@@ -31,6 +31,6 @@ const sessionSchema = new Schema(
   }
 );
 
-const Session = model("Session", sessionSchema);
+const Room = model("Room", roomSchema);
 
-module.exports = Session;
+module.exports = Room;
