@@ -27,7 +27,7 @@ const areaSchema = new Schema(
     events: [{
         type: String,
       }],
-    Adventure: {
+    adventure: {
       type: Schema.Types.ObjectId,
       ref: "Adventure",
     },

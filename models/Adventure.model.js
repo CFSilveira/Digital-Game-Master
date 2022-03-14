@@ -17,7 +17,7 @@ const adventureSchema = new Schema(
         trim: true,
       },
     steps: Number,
-    Areas: [{
+    areas: [{
       type: Schema.Types.ObjectId,
       ref: "Area",
     }],

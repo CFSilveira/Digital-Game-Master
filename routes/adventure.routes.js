@@ -2,6 +2,7 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 
 const Adventure = require('../models/Adventure.model');
+//const Area = require('../models/Adventure.model');
 
 router.post('/adventure', (req, res, next) => {
   const { name, image, description, steps, zonesA, zonesB, zonesC, encounters } = req.body;
@@ -26,12 +27,15 @@ router.get('/adventure/:adventureId', (req, res, next) => {
   }
 
   Adventure.findById(adventureId)
+    .populate('areas')
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
 
-router.put('/adventure/:adventureId', (req, res, next) => {
+router.put('/adventure/edit/:adventureId', (req, res, next) => {
   const { adventureId } = req.params;
+
+  console.log(adventureId)
 
   if (!mongoose.Types.ObjectId.isValid(adventureId)) {
     res.status(400).json({ message: 'Specified Id is not valid' });
@@ -39,6 +43,7 @@ router.put('/adventure/:adventureId', (req, res, next) => {
   }
 
   Adventure.findByIdAndUpdate(adventureId, req.body, { new: true })
+    .populate('areas')
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });

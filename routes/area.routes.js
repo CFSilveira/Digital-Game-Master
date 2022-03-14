@@ -1,12 +1,17 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
-
+const Adventure = require('../models/Adventure.model');
 const Area = require('../models/Area.model');
 
-router.post('/area', (req, res, next) => {
-  const { name, description, image, step, connections, events } = req.body;
+router.post('/area', async (req, res, next) => {
+  const { name, description, image, step, connections, events, adventureId } = req.body;
 
-  Area.create({ name, description, image, step, connections, events })
+  const quest = await Adventure.findById(adventureId);
+
+  Area.create({ name, description, image, step, adventure: quest })
+    .then((newArea) => {
+      return Adventure.findByIdAndUpdate(adventureId, { $push: { areas: newArea._id } }, { new: true });
+    })
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
@@ -54,5 +59,7 @@ router.delete('/area/:areaId', (req, res, next) => {
       .then(() => res.json({message: `Area with ${areaId} was removed successfully` }))
       .catch((err) => res.json(err));
   });
+
+
 
 module.exports = router;
