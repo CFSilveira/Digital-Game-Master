@@ -8,10 +8,6 @@ const roomSchema = new Schema(
       trim: true,
       required: true,
     },
-    roomId: {
-        type: Number,
-        unique: true,
-      },
     gameMaster: [{
         type: Schema.Types.ObjectId,
         ref: "User",

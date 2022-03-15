@@ -30,6 +30,19 @@ router.get('/room/:roomId', (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+router.get('/room/game/:roomId', (req, res, next) => {
+  const { roomId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(roomId)) {
+    res.status(400).json({ message: 'Specified Id is not valid' });
+    return;
+  }
+
+  Room.findById(roomId)
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
+
 router.put('/room/:roomId', (req, res, next) => {
   const { roomId } = req.params;
 
