@@ -18,8 +18,6 @@ router.get('/adventure', (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-
-
 router.get('/adventure/:adventureId', (req, res, next) => {
   const { adventureId } = req.params;
 
@@ -34,8 +32,19 @@ router.get('/adventure/:adventureId', (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+router.get('/adventure/game/:adventureId', (req, res, next) => {
+  const { adventureId } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(adventureId)) {
+    res.status(400).json({ message: 'Specified Id is not valid' });
+    return;
+  }
 
+  Adventure.findById(adventureId)
+    .populate('areas')
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
 
 router.put('/adventure/edit/:adventureId', (req, res, next) => {
   const { adventureId } = req.params;
