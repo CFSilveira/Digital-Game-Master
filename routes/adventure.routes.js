@@ -27,8 +27,17 @@ router.get('/adventure/:adventureId', (req, res, next) => {
   }
 
   Adventure.findById(adventureId)
-    .populate('areas')
-    .then((response) => res.json(response))
+
+    .populate({
+      path: 'areas',
+      populate: {
+        path: 'connections',
+        model: 'Area',
+      },
+    })
+    .then((response) => {console.log(response)
+    res.json(response)
+    })
     .catch((err) => res.json(err));
 });
 
@@ -42,7 +51,9 @@ router.get('/adventure/game/:adventureId', (req, res, next) => {
 
   Adventure.findById(adventureId)
     .populate('areas')
-    .then((response) => res.json(response))
+    .then((response) => {console.log(response)
+    res.json(response)
+    })
     .catch((err) => res.json(err));
 });
 
